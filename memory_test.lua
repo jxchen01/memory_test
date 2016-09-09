@@ -31,17 +31,15 @@ local imageSize = 180
 cutorch.setDevice(opt.gpu)
 
 -------------------------------------------------------------------------------
----  Part1: Data Loading 
+---  Part1: Data Loading (fake)
 -------------------------------------------------------------------------------
-image_all = {}  -- "data" should be a table of data structures with field ('input','target','init')  
+image_all = {}    
 target_all = {}
 -- load all data
 for i=1,10 do
     table.insert(image_all, torch.Tensor(20,imageSize, imageSize):fill(1))
 	table.insert(target_all,torch.ByteTensor(20,imageSize,imageSize):fill(1))
 end
-
-print('finish loading data')
 
 -------------------------------------------------------------------------------
 ---  Part2: Model and Criterion
@@ -64,17 +62,13 @@ L1h=nn.ReLU(true)(L1g)
 
 model = nn.gModule({input},{L1h})
 model = nn.Recursor(model,opt.rho)
-
 model:cuda()
 
 criterion = cudnn.SpatialCrossEntropyCriterion():cuda()
 
-
-
 -- parameters initialization
 params, gradParams = model:getParameters()
 params:uniform(-0.01,0.01)
-
 
 -------------------------------------------------------------------------------
 ---  Part3: Training 
