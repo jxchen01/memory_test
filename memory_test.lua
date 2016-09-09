@@ -47,6 +47,7 @@ print('finish loading data')
 ---  Part2: Model and Criterion
 -------------------------------------------------------------------------------
 -- build the model 
+-- Note: The model itself is only for test, not for solving real problems
 input = nn.Identity()()
 
 L1a=nn.SpatialConvolution(1,64,3,3,1,1,1,1)(input)
