@@ -34,7 +34,7 @@ cutorch.setDevice(opt.gpu)
 -------------------------------------------------------------------------------
 ---  Part1: Data Loading 
 -------------------------------------------------------------------------------
-image_all = {}  -- "data" should be a table of data structures with field ('input','target','init')  
+image_all = {}   
 target_all = {}
 -- load all data
 for i=1,10 do
@@ -100,7 +100,7 @@ function train()
 		end
 	end
 
-    local data_index = torch.randperm(10):long() -- feed the training sequences in a random order
+    local data_index = torch.randperm(10):long() 
 	
 	for i=1,2 do
 		local input_sequence = image_all[data_index[i]]
